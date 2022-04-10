@@ -1,8 +1,14 @@
 import { Equal, Expect } from '@type-challenges/utils'
 
-type cases = [
-  Expect<Equal<DeepReadonly<X>, Expected>>,
-]
+type DeepReadonly<T> = T extends Record<string, unknown>
+  ? {
+      +readonly [k in keyof T]: DeepReadonly<T[k]>
+    }
+  : T
+
+type V = DeepReadonly<X>
+
+type cases = [Expect<Equal<DeepReadonly<X>, Expected>>]
 
 type X = {
   a: () => 22
