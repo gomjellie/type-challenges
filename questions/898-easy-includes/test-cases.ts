@@ -1,8 +1,23 @@
 import { Equal, Expect } from '@type-challenges/utils'
 
+// prettier-ignore
+type Same<T, Q> = 
+  (<P>() => P extends T ? 1 : 2) extends 
+  (<P>() => P extends Q ? 1 : 2) ? true : false
+
+type Includes<T extends unknown[], Q> = T extends [infer X, ...infer Y]
+  ? Same<X, Q> extends true
+    ? true
+    : Includes<Y, Q>
+  : false
+
 type cases = [
-  Expect<Equal<Includes<['Kars', 'Esidisi', 'Wamuu', 'Santana'], 'Kars'>, true>>,
-  Expect<Equal<Includes<['Kars', 'Esidisi', 'Wamuu', 'Santana'], 'Dio'>, false>>,
+  Expect<
+    Equal<Includes<['Kars', 'Esidisi', 'Wamuu', 'Santana'], 'Kars'>, true>
+  >,
+  Expect<
+    Equal<Includes<['Kars', 'Esidisi', 'Wamuu', 'Santana'], 'Dio'>, false>
+  >,
   Expect<Equal<Includes<[1, 2, 3, 5, 6, 7], 7>, true>>,
   Expect<Equal<Includes<[1, 2, 3, 5, 6, 7], 4>, false>>,
   Expect<Equal<Includes<[1, 2, 3], 2>, true>>,
@@ -16,5 +31,5 @@ type cases = [
   Expect<Equal<Includes<[1], 1 | 2>, false>>,
   Expect<Equal<Includes<[1 | 2], 1>, false>>,
   Expect<Equal<Includes<[null], undefined>, false>>,
-  Expect<Equal<Includes<[undefined], null>, false>>,
+  Expect<Equal<Includes<[undefined], null>, false>>
 ]
