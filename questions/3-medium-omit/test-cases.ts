@@ -1,5 +1,9 @@
 import { Equal, Expect } from '@type-challenges/utils'
 
+type MyOmit<T, Q extends keyof T> = {
+  [key in Exclude<keyof T, Q>]: T[key]
+}
+
 type cases = [
   Expect<Equal<Expected1, MyOmit<Todo, 'description'>>>,
   Expect<Equal<Expected2, MyOmit<Todo, 'description' | 'completed'>>>
