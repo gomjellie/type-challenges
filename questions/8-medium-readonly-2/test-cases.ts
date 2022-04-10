@@ -1,9 +1,16 @@
 import { Alike, Expect } from '@type-challenges/utils'
 
+type MyReadonly2<T, Q extends keyof T = keyof T> =
+  | {
+      +readonly [k1 in Q]: T[k1]
+    } & {
+      [k in Exclude<keyof T, Q>]: T[k]
+    }
+
 type cases = [
   Expect<Alike<MyReadonly2<Todo1>, Readonly<Todo1>>>,
   Expect<Alike<MyReadonly2<Todo1, 'title' | 'description'>, Expected>>,
-  Expect<Alike<MyReadonly2<Todo2, 'title' | 'description'>, Expected>>,
+  Expect<Alike<MyReadonly2<Todo2, 'title' | 'description'>, Expected>>
 ]
 
 interface Todo1 {
