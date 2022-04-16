@@ -2,6 +2,16 @@ import { Alike, Expect } from '@type-challenges/utils'
 
 declare const a: Chainable
 
+type Chainable<T = unknown> = {
+  option<K extends string, O>(
+    k: K extends keyof T ? never : K,
+    o: O
+  ): Chainable<T & Record<K, O>>
+  get(): T
+}
+
+const V = a.option('name', 'another name')
+
 const result1 = a
   .option('foo', 123)
   .option('bar', { value: 'Hello World' })
@@ -16,7 +26,7 @@ const result2 = a
 
 type cases = [
   Expect<Alike<typeof result1, Expected1>>,
-  Expect<Alike<typeof result2, Expected2>>,
+  Expect<Alike<typeof result2, Expected2>>
 ]
 
 type Expected1 = {
