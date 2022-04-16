@@ -1,5 +1,37 @@
 import { Equal, Expect } from '@type-challenges/utils'
 
+// prettier-ignore
+type MyCapitalize<T> =
+  T extends `${infer F}${infer Rest}` ? (
+    F extends 'a' ? `A${Rest}` :
+    F extends 'b' ? `B${Rest}` :
+    F extends 'c' ? `C${Rest}` :
+    F extends 'd' ? `D${Rest}` :
+    F extends 'e' ? `E${Rest}` :
+    F extends 'f' ? `F${Rest}` :
+    F extends 'g' ? `G${Rest}` :
+    F extends 'h' ? `H${Rest}` :
+    F extends 'i' ? `I${Rest}` :
+    F extends 'j' ? `J${Rest}` :
+    F extends 'k' ? `K${Rest}` :
+    F extends 'l' ? `L${Rest}` :
+    F extends 'm' ? `M${Rest}` :
+    F extends 'n' ? `N${Rest}` :
+    F extends 'o' ? `O${Rest}` :
+    F extends 'p' ? `P${Rest}` :
+    F extends 'q' ? `Q${Rest}` :
+    F extends 'r' ? `R${Rest}` :
+    F extends 's' ? `S${Rest}` :
+    F extends 't' ? `T${Rest}` :
+    F extends 'u' ? `U${Rest}` :
+    F extends 'v' ? `V${Rest}` :
+    F extends 'w' ? `W${Rest}` :
+    F extends 'x' ? `X${Rest}` :
+    F extends 'y' ? `Y${Rest}` :
+    F extends 'z' ? `Z${Rest}` : T
+  ) :
+  T
+
 type cases = [
   Expect<Equal<MyCapitalize<'foobar'>, 'Foobar'>>,
   Expect<Equal<MyCapitalize<'FOOBAR'>, 'FOOBAR'>>,
@@ -30,5 +62,5 @@ type cases = [
   Expect<Equal<MyCapitalize<'w'>, 'W'>>,
   Expect<Equal<MyCapitalize<'x'>, 'X'>>,
   Expect<Equal<MyCapitalize<'y'>, 'Y'>>,
-  Expect<Equal<MyCapitalize<'z'>, 'Z'>>,
+  Expect<Equal<MyCapitalize<'z'>, 'Z'>>
 ]
