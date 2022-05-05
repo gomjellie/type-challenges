@@ -29,7 +29,8 @@
     "fast-glob": "^3.2.7",
     "fs-extra": "^10.0.0",
     "js-yaml": "^4.1.0",
-    "lz-string": "^1.4.4"
+    "lz-string": "^1.4.4",
+    "ts-node": "^10.7.0"
   },
   "eslintConfig": {
     "extends": "@antfu/eslint-config-ts",
