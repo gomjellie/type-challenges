@@ -1,10 +1,14 @@
-import { Equal, Expect, ExpectFalse, NotEqual } from '@type-challenges/utils'
+import { Equal, Expect } from '@type-challenges/utils'
 
 interface Model {
   name: string
   count: number
   isReadonly: boolean
   isEnable: boolean
+}
+
+type OmitByType<T, U> = {
+  [k in keyof T as T[k] extends U ? never : k]: T[k]
 }
 
 type cases = [
