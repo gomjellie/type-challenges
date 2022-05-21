@@ -1,4 +1,4 @@
-import { Equal, Expect, ExpectFalse, NotEqual } from '@type-challenges/utils'
+import { Equal, Expect } from '@type-challenges/utils'
 
 interface Todo1 {
   title: string
@@ -9,6 +9,9 @@ interface Todo1 {
   }
 }
 
-type cases = [
-  Expect<Equal<Mutable<Readonly<Todo1>>, Todo1>>,
-]
+// prettier-ignore
+type Mutable<T> = {
+  -readonly [k in keyof T]: T[k]
+}
+
+type cases = [Expect<Equal<Mutable<Readonly<Todo1>>, Todo1>>]
